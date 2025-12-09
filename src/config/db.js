@@ -2,7 +2,12 @@
 import dotenv from "dotenv";
 import pkg from "pg";
 
-dotenv.config();
+// Load env from .env, fall back to .env.example
+const result = dotenv.config();
+if (result.error) {
+  dotenv.config({ path: ".env.example" });
+  console.log(".env not found, loaded .env.example instead");
+}
 
 const { Pool } = pkg;
 

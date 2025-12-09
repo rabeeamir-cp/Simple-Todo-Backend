@@ -1,6 +1,12 @@
 // src/server.js
 import dotenv from "dotenv";
-dotenv.config();
+
+// Load env from .env, fall back to .env.example
+const result = dotenv.config();
+if (result.error) {
+  dotenv.config({ path: ".env.example" });
+  console.log(".env not found, loaded .env.example instead");
+}
 
 import app from "./app.js";
 
